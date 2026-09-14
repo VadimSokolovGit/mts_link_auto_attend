@@ -1,15 +1,11 @@
 // ==UserScript==
-// @name         Авто-Подтверждение Присутствия — МТС Линк & Яндекс Телемост
+// @name         Авто-Подтверждение Присутствия (Универсальное)
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
-// @description  Автоматическое подтверждение присутствия на вебинарах, лекциях и встречах (МТС Линк, Webinar.ru, Яндекс Телемост)
+// @version      1.2.0
+// @description  Автоматическое подтверждение присутствия на вебинарах, лекциях и встречах (МТС Линк, Телемост, Zoom, SberJazz, VK Звонки, Pruffme и любые другие сайты)
 // @author       Antigravity
-// @match        https://*.mts-link.ru/*
-// @match        https://*.webinar.ru/*
-// @match        https://telemost.yandex.ru/*
-// @match        https://*.telemost.yandex.ru/*
-// @match        https://telemost.yandex.com/*
-// @match        https://*.telemost.yandex.com/*
+// @match        http://*/*
+// @match        https://*/*
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_registerMenuCommand
@@ -42,7 +38,7 @@
     } catch (e) {}
   }
 
-  // Ключевые фразы для поиска окон присутствия и кнопок
+  // Ключевые фразы для поиска окон присутствия и кнопок (универсальный список)
   const PRESENCE_KEYWORDS = [
     'присутствие',
     'присутствия',
@@ -56,7 +52,16 @@
     'контроль присутствия',
     'продолжить звонок',
     'продолжить встречу',
-    'неактивност'
+    'продолжить просмотр',
+    'продолжить участие',
+    'продолжить работу',
+    'неактивност',
+    'are you still there',
+    'are you here',
+    'attendance check',
+    'activity check',
+    'confirm attendance',
+    'confirm presence'
   ];
 
   const BUTTON_KEYWORDS = [
@@ -64,12 +69,21 @@
     'подтвердить',
     'подтверждаю',
     'я на месте',
+    'на месте',
     'да, я тут',
+    'я тут',
+    'я смотрю',
     'продолжить',
-    'да',
+    'продолжить просмотр',
+    'продолжить участие',
     'вернуться в звонок',
     'остаться',
-    'я тут'
+    'да',
+    'i am here',
+    'i\'m here',
+    'confirm',
+    'continue',
+    'yes'
   ];
 
   let lastConfirmTime = 0;

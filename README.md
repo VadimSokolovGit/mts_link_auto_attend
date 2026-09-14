@@ -9,6 +9,7 @@
 Расширение работает **универсально на всех веб-сайтах**, включая:
 - **МТС Линк / Webinar.ru** (`*.mts-link.ru`, `*.webinar.ru`)
 - **Яндекс Телемост** (`telemost.yandex.ru`, `telemost.yandex.com`)
+- **Microsoft Teams (веб-версия)** (`teams.microsoft.com`, `teams.live.com`)
 - **VK Звонки** (`vk.com/call`, `calls.vk.com`)
 - **SberJazz / Джаз** (`jazz.sber.ru`)
 - **Zoom Web Client** (`*.zoom.us`)

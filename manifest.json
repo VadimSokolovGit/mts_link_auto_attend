@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Авто-Подтверждение Присутствия (МТС Линк & Яндекс Телемост)",
+  "version": "1.1.0",
+  "description": "Автоматически подтверждает ваше присутствие на вебинарах, лекциях и встречах (МТС Линк, Webinar.ru, Яндекс Телемост)",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Авто-Подтверждение Присутствия",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.mts-link.ru/*",
+        "https://*.webinar.ru/*",
+        "https://telemost.yandex.ru/*",
+        "https://*.telemost.yandex.ru/*",
+        "https://telemost.yandex.com/*",
+        "https://*.telemost.yandex.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mts-link-autoconfirm@local"
+    }
+  }
+}

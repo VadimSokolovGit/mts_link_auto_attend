@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>МТС Линк Авто-Подтверждение</title>
+  <style>
+    :root {
+      --bg-color: #0f111a;
+      --card-bg: #1a1d2e;
+      --text-main: #f0f2f5;
+      --text-sub: #8a8f9e;
+      --accent-red: #ff0032;
+      --accent-green: #00e676;
+      --border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 320px;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 16px;
+      user-select: none;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #ff0032, #ff5252);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(255, 0, 50, 0.4);
+    }
+
+    .brand-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: #ffffff;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 20px;
+      background: rgba(0, 230, 118, 0.12);
+      color: var(--accent-green);
+      border: 1px solid rgba(0, 230, 118, 0.2);
+    }
+
+    .status-badge.disabled {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-sub);
+      border-color: var(--border-color);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
+    .main-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .toggle-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .toggle-sub {
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    /* Switch styling */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #2c3044;
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent-red);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    .stats-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .stats-count {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .options-list {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 8px 16px;
+      margin-bottom: 16px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .option-item:not(:last-child) {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .option-title {
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .btn-reset {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      padding: 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-reset:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      </div>
+      <div class="brand-title">Авто-Присутствие</div>
+    </div>
+    <div id="statusBadge" class="status-badge">
+      <span class="status-dot"></span>
+      <span id="statusText">Активно</span>
+    </div>
+  </div>
+
+  <div class="main-toggle">
+    <label for="toggleEnabled" style="cursor: pointer;">
+      <div class="toggle-label">Авто-подтверждение</div>
+      <div class="toggle-sub">Автокликер присутствия</div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" id="toggleEnabled" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="stats-card">
+    <div>
+      <div class="toggle-sub">Подтверждено лекций</div>
+      <div class="toggle-label" style="font-weight: 400; font-size: 12px; color: var(--text-sub);">Автоматических откликов</div>
+    </div>
+    <div id="statsCount" class="stats-count">0</div>
+  </div>
+
+  <div class="options-list">
+    <div class="option-item">
+      <label for="toggleSound" class="option-title" style="cursor: pointer;">Звуковой сигнал</label>
+      <label class="switch">
+        <input type="checkbox" id="toggleSound" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="option-item">
+      <label for="toggleBadge" class="option-title" style="cursor: pointer;">Экранный бейдж</label>
+      <label class="switch">
+        <input type="checkbox" id="toggleBadge" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <button id="btnReset" class="btn-reset">Сбросить счетчик</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

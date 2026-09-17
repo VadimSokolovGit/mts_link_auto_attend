@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>МТС Линк Авто-Подтверждение</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      </div>
+      <div class="brand-title">Авто-Присутствие</div>
+    </div>
+    <div id="statusBadge" class="status-badge">
+      <span class="status-dot"></span>
+      <span id="statusText">Активно</span>
+    </div>
+  </div>
+
+  <div class="main-toggle">
+    <label for="toggleEnabled" style="cursor: pointer;">
+      <div class="toggle-label">Авто-подтверждение</div>
+      <div class="toggle-sub">Автокликер присутствия</div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" id="toggleEnabled" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="stats-card">
+    <div>
+      <div class="toggle-sub">Подтверждено лекций</div>
+      <div class="toggle-label" style="font-weight: 400; font-size: 12px; color: var(--text-sub);">Автоматических откликов</div>
+    </div>
+    <div id="statsCount" class="stats-count">0</div>
+  </div>
+
+  <div class="options-list">
+    <div class="option-item">
+      <label for="toggleSound" class="option-title" style="cursor: pointer;">Звуковой сигнал</label>
+      <label class="switch">
+        <input type="checkbox" id="toggleSound" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="option-item">
+      <label for="toggleBadge" class="option-title" style="cursor: pointer;">Экранный бейдж</label>
+      <label class="switch">
+        <input type="checkbox" id="toggleBadge" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <button id="btnReset" class="btn-reset">Сбросить счетчик</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

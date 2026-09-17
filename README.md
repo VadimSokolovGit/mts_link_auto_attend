@@ -40,6 +40,38 @@
 
 ---
 
+## 📜 Установка Userscript (Tampermonkey / Violentmonkey / Greasemonkey)
+
+1. Установите менеджер скриптов (например, Tampermonkey).
+2. Откройте файл `dist/mts_link_autoconfirm.user.js`.
+3. Скопируйте его содержимое в новый скрипт менеджера и сохраните.
+4. Управление — через меню Tampermonkey: переключение звука и сброс счётчика.
+
+---
+
+## 🛠 Структура проекта и сборка
+
+```
+manifest.json   # манифест расширения (MV3)
+build.js        # сборщик userscript (без зависимостей)
+src/
+  core.js       # общий движок (единый источник логики)
+  content.js    # адаптер расширения (chrome/browser.storage)
+  popup.html/css/js
+  userscript/adapter.js
+icons/icon.png
+dist/mts_link_autoconfirm.user.js   # генерируется сборкой
+```
+
+Userscript генерируется из `src/core.js` + `src/userscript/adapter.js`, поэтому не редактируйте `dist/*.user.js` вручную.
+
+```bash
+npm run check   # синтаксическая проверка
+npm run build   # пересобрать userscript
+```
+
+---
+
 ## ⚙️ Возможности
 
 - **Универсальный автокликер**: мгновенно находит всплывающие окна контроля активности и нажимает «Я здесь», «Подтвердить», «Продолжить звонок», «Вернуться в звонок» и др.
